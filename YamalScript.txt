@@ -1,0 +1,71 @@
+Resources:
+  MyVPC:
+    Type: 'AWS::EC2::VPC'
+    Properties:
+      CidrBlock: '10.0.0.0/16'
+      EnableDnsHostnames: true
+      Tags:
+        - Key: 'your-key'
+          Value: 'MyVPC'
+
+  PublicSubnet:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref MyVPC
+      CidrBlock: '10.0.1.0/24'
+      AvailabilityZone: 'ap-south-1a'
+      Tags:
+        - Key: 'your-key'
+          Value: 'PublicSubnet'
+
+  PrivateSubnet:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref MyVPC
+      CidrBlock: '10.0.2.0/24'
+      AvailabilityZone: 'ap-south-1a'
+      Tags:
+        - Key: 'your-key'
+          Value: 'PrivateSubnet'
+
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow SSH and HTTP
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+  MyInstance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      AvailabilityZone: ap-south-1a
+      ImageId: ami-0dee22c13ea7a9a67
+      InstanceType: t2.micro
+      KeyName: your-key
+      SecurityGroups: 
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref PublicSubnet 
+
+  MyInstance1:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      AvailabilityZone: ap-south-1a
+      ImageId: ami-064ac61091898694e
+      InstanceType: t2.micro
+      KeyName: your-key
+      SecurityGroups: 
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref PrivateSubnet 
+  MySNSTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+      - Endpoint: "your@gmail.com"
+        Protocol: email
