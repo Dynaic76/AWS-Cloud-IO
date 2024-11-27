@@ -1,0 +1,86 @@
+##Step 1: Create a Security Group for the AWS Instance
+Create a new security group for your AWS instance and add the following rules:
+Inbound: Custom TCP rule: port 85-86-88
+HTTP rule: port 80
+SSH rule: port 22
+ 
+Outbound: SSH rule: port 22
+All traffic: allow all traffic
+
+ 
+##Step 2: Launch the Instance
+Launch a new instance of Amazon Linux.
+
+
+ 
+Step 3: Connect to the Instance using SSH
+Connect to the instance using SSH from your Windows terminal.
+“ssh -i "path/to/your/pem/file" ec2-user@instance-ip-address”
+
+
+Step 4: Update the Instance
+Update the instance to ensure you have the latest packages
+“sudo yum update -y”
+
+
+Step 5: Install the HTTP Server
+Install the HTTP server (Apache) on the instance.
+“sudo yum install httpd -y”
+
+
+Step 6: Create Directories for Each Website
+Create directories for each website.
+“sudo mkdir -p /var/www/web1 /var/www/web2 /var/www/web3”
+
+
+Step 7: Create an index.html File in the Home Directory
+Create an index.html file in the home directory.
+“sudo nano index.htm”l
+
+
+Step 8: Copy the index.html File to Each Website Directory
+Copy the index.html file to each website directory.
+“sudo cp -r ~/index.html /var/www/web1 && sudo cp -r ~/index.html /var/www/web2 && sudo cp -r
+~/index.html /var/www/web3”
+
+
+Step 9: Change Ownership of the Website Directories
+Change ownership of the website directories to the Apache user.
+sudo chown -R apache:apache /var/www/web1 /var/www/web2 /var/www/web3
+
+ 
+
+
+step 10: Configure the HTTP Server
+Configure the HTTP server by editing the httpd.conf file.
+“sudo nano /etc/httpd/conf/httpd.conf”
+Add the following content to the file:
+Listen 85
+Listen 86
+Listen 88
+“<VirtualHost *:81>
+DocumentRoot /var/www/web1
+</VirtualHost>
+<VirtualHost *:82>
+DocumentRoot /var/www/web2
+</VirtualHost>
+<VirtualHost *:83>
+DocumentRoot /var/www/web3
+</VirtualHost>”
+
+
+Step 11: Start the httpd server
+“sudo systemctl start httpd”
+
+
+Step 12: Configure the DNS Settings
+Configure the DNS settings to point to the instance IP address.
+
+DNS Settings
+Note: Replace the ServerName directives with your own domain names or IP addresses.
+
+
+Step 13: Restart the HTTP server 
+
+
+
