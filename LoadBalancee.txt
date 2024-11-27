@@ -1,0 +1,49 @@
+Step 1: Create a Security Group for the AWS Instance
+Create a new security group for your AWS instance and add the following rules:
+Inbound:
+HTTP rule: port 806
+SSH rule: port 22
+HTTPS rule:port 443
+ 
+Outbound: SSH rule: port 22
+All traffic: allow all traffic
+ 
+Step 2: Launch the 4 Instance
+Launch a new instance of Ubuntu.
+ 
+ 
+Add a script in user data
+
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install apache2 -y
+sudo systemctl start apache2
+sudo systemctl enable apache2
+sudo systemctl status apache2
+sudo systemctl restart apache2
+ echo"<h1> This Message is from $(hostname -f)</h1>" >/var/www/html/index.html 
+ 
+Here 4 instances are launch
+ 
+Step 3: Create Target Group choose target group type- instance
+Add TG name, protocol port, ip address type and protocol version.
+ 
+TG is created
+Step 4- Create Load Balancer select application load balancer type
+Add basic configuration to the LB
+Add basic configuration to the LB
+ 
+Select availability zones
+ 
+Add existing security group and target group
+ 
+Here load balancer is created
+ 
+ 
+Summary of your Load Balancer
+Step 5: Copy DNS name of LB and paste to browser
+Here ip address of different 4 servers
+ 
+ 
+ 
+
