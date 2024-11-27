@@ -1,0 +1,47 @@
+Step 1: Create a Role in the Provider Account 
+1. Log in to the AWS Console with the Provider account (the account you want to give access to).In my case  
+2. Navigate to the IAM Service. 
+3. In the left navigation pane, click on Roles. 
+4. Click on Create Role.
+ 
+Step 2: Add Permissions 
+• In the Add Permissions section, filter the permissions by AWS Managed - Job Function 
+• In the search bar, search for ReadOnlyAccess. 
+• Select the ReadOnlyAccess policy to provide read-only access to the Utilizer account.
+ 
+Step 3: Name, Review, and Create Role 
+1. Enter a name and description for the role. 
+2. Review the role configuration and click on Create Role.
+ 
+Here role is created
+ 
+Step 4: Create an IAM User in the Utilizer Account 1. Log in to the Utilizer account.
+ 2. Go to the IAM Service and create a new IAM User. 
+3. Name the user, check the Provide user access to the AWS Management Console field, and then provide a password. 
+4. Attach the AdministratorAccess policy to the user
+ 
+ 
+ 
+ 
+ 
+ 
+Step 5: Switch Role in the Utilizer Account
+ 
+ 
+Log in with the IAM user you just created in the Utilizer account. 
+• In the top-right corner, click on the Account Name. 
+• Click on Switch Role.
+1.Enter the Provider Account ID and the Role Name (the one created in the Provider account). 
+2. Enter a Display Name and choose a Display Color if desired.
+ 
+ 
+Step 7: Verify Access 
+1.	To verify access, create an S3 bucket in the Provider account. 
+2.	 Enter a unique name for the bucket.
+ 
+Here bucket created 
+ 
+Now, to verify if cross-account access works, return to the Utilizer account IAM user and navigate to the S3 service to check the bucket you just created.
+ 
+You can see We are able to see the bucket which we created at Providers Account.
+
