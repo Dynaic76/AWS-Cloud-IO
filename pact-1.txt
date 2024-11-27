@@ -35,7 +35,7 @@ Create directories for each website.
 
 Step 7: Create an index.html File in the Home Directory
 Create an index.html file in the home directory.
-“sudo nano index.htm”l
+“sudo nano index.html”
 
 
 Step 8: Copy the index.html File to Each Website Directory
