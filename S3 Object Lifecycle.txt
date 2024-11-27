@@ -1,0 +1,31 @@
+Step 1:- Go to S3 Service and click on Create Bucket 
+  
+Step 2:- Enter Bucket Name (s3--) 
+ 
+
+  
+Step 3:- Go to the Bucket you just created and upload some files. 
+  
+ 
+
+Step 4:- After uploading the files, go to the S3 Bucket. In the Objects section, switch to the Management section. Click on Create Lifecycle Rule under Management section. Click on Create Lifecycle Rule. 
+  
+1. Enter the Lifecycle Rule Name. Select the Rule Scope as Apply to all objects in 
+ 
+
+  
+2. In Lifecycle Rule Actions, select the actions as per your requirement. Here, choose Transition current versions of objects between storage classes. 
+  
+ 
+
+3.	In the Transition Current Versions of Objects between Storage Classes section, set up the storage classes as needed. For this example, configure the transition as shown in the image below: 
+  
+4.	Review all configurations. 
+ 
+
+  
+5. After reviewing, click on Create Rule. The rule will be applied to the S3 bucket. 
+  
+ 
+
+-As per this setup, the objects in your S3 bucket will automatically transition between storage classes according to the configured lifecycle rules. 
