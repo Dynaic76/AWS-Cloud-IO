@@ -1,0 +1,46 @@
+Step 1: Create an S3 Bucket
+ 1. Go to the Amazon S3 service in the AWS Console. 
+2. Click on Create bucket.
+ 3. Enter a name for your bucket
+4. Click Create bucket to complete the setup.
+ 
+Step 2 :- Create an Ec2 Instance with following configuration:-
+  - Name of Instance :- ec2-9022 
+- AMI Image :- Ubuntu 
+ - Instance type :- t2.micro   
+- Key Pair :- Create new key pair or select existing  
+ - Network Setting :- Leave all Setting Default   - Launch the Instance  
+
+
+ 
+- Select the Instance & Connect it.
+ 
+Step3. Create IAM User
+1.give user name-EC2USer
+2.Set Permission-s3fullAccess
+3.create user
+     
+ 
+ 
+Step4.go to user.
+2.Create access key
+3.Select CLI
+4.Tick  check box
+5.next
+6.Copy access key and secret key
+7.Done
+
+ 
+Step5.connect the instance
+ 
+Step6.run the following command in terminal
+sudo apt update –y
+ 
+ sudo apt upgrade –y
+ 
+sudo snap install aws-cli –classic
+ 
+ aws configure
+ aws s3 ls
+ 
+We have successfully access the s3 bucket through EC2 instance.
