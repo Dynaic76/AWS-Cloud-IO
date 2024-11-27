@@ -1,0 +1,12 @@
+• Launch an Instance with t2 micro instance type
+ 
+Stop the Instance:-
+ 
+Here instance is stop
+ 
+• Change the Instance setting
+• Go on action and click Instance Setting, and then Instance type
+•	Change t2 micro to t3 micro
+ 
+Now go on Instance state and click start Instance
+ 
