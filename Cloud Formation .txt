@@ -1,0 +1,66 @@
+ 
+Step 1: Create a Key Pair in AWS Console 
+•	Log in to the AWS Management Console using your credentials. 
+•	Navigate to the EC2 dashboard and click on Key Pairs in the left-hand menu. 
+•	Click on Create key pair and enter a name for your key pair (""). 
+•	Choose the RSA key pair type and set the Key pair type to pem. 
+•	Click Create key pair to create the key pair. 
+•	Download the .pem file and save it securely. 
+  
+Step 2: Create an IAM Role for cloud formation 
+•	Log in to the AWS Management Console and navigate to the IAM dashboard. 
+•	Click on "Roles" in the left-hand menu and then click on "Create role".". 
+•	Enter a name for your role, such as "CloudFormation". 
+ 
+
+•  
+ 
+Click "Next: Review" and then click "Create role". 
+ 
+Step 3: Attach Policies to the IAM Role 
+•	In the IAM dashboard, click on "Roles" and select the role you just created. 
+ 
+
+  
+•	Click on the "Permissions" tab and then click on "Attach policy". 
+•	Search for and select the following policies: 
+•	"CloudFormationFullAccess" 
+•	"AmazonSNSFullAccess" 
+•	"AmazonEC2FullAccess" 
+•	Click "Attach policy" to attach each policy to the role. 
+  
+•	Click on Create Role 
+Step 4: Edit the YAML Script 
+•	Open the provided YAML script in a text editor. 
+•	Update the script with the values specific to your configuration and the key pair name created in Step 1. 
+•	Save the updated YAML script. 
+ 
+ 
+
+  
+ 
+ 
+Step 5: Create a CloudFormation Stack 
+•	Log in to the AWS Management Console and navigate to the CloudFormation dashboard. 
+•	Click on "Create stack" and choose "With a template". 
+•	Select "Upload a template file" and upload the YAML script  provided Below. 
+  
+•	Click "Next" and enter a stack name, such as "CloudFormation". 
+  
+•	Click "Next" and select the IAM role you created earlier. 
+ 
+  
+•	Click "Create stack" to create the stack. 
+ 
+ 
+Step 6: configure the settings and iam roles and keep all the other settings default  • 	 Don’t Change Default Settings And Click On Submit  
+  
+Step 7: Wait For Stack Creation   
+•	The Status Of Stack Should Be CREATE_COMPLETE 
+ 
+ 
+•	Now You have a CloudFormation stack that creates a VPC with public and private subnets, an SNS topic with an email subscription, and two EC2 instances. 
+ 
+ 
+ 
+ 	  	 
