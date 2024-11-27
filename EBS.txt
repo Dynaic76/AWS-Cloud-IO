@@ -1,0 +1,155 @@
+Step 1 :- On AWS Console, Search for EC2 and Click on it. 
+  
+Step 2 :- Create an ec2 Instance with following configuration:-  
+-	Name of Instance :- io-ec2-1077 
+-	AMI Image :- Ubuntu –  Instance type :- t2.micro 
+-	Key Pair :- Create new key pair or select existing 
+-	Network Setting :- Leave all Setting Default 
+-	Security Group :- Create a new Allowing SSH & HTTP traffic 
+-	Launch the Instance 
+ 
+
+ 
+  
+Step 3 :- SSH into Your EC2 Instance from the Local Terminal  
+1.	Open your Local Terminal and locate your private key file, in this case Downloads folder has the private key file (new.pem) 
+2.	Now, used this command to SSH to ec2 instance by aws ssh link or you can also use following command:- - ssh -i “new.pem” ubuntu@57.181.33.179 ( change the IP to your Instance public IP ) 
+ 
+
+ 
+ 
+- Now you have successfully connect to your Instance 
+ 
+
+3. Install Wget , Unzip, Zip, Apache2 WebServer 
+ - sudo apt install wget zip unzip apache2 
+  
+4. Again, Run sudo systemctl status apache2 ( to check the status ) 
+ 
+
+  
+5. wget the free template from google ( It will downloads the zip of the website template from source ) - wget 
+ 
+
+ 
+  
+6. Unzip the Website Template file - unzip carint.zip 
+  
+ 
+
+ 
+7. Go to extracted file  
+-	cd carint-html  
+-	ls (will show all the files available in that file) 
+8. Move all files inside carint-html folder to /var/www/html 
+ - sudo mv * /var/www/html 
+  
+9. Copy the Public Instance Id to the browser to see the Website is working or not, 
+ Note :- After this , delete the images inside the /var/www/html/images 
+ 
+
+ 
+  
+Step 4 :- Create a new Volume & attach it to your Ec2 Instance  
+
+ 
+1.	Select Gp2 type , 5 gb size & Your availability Zone & create it. 
+  
+2.	successfully created volume & named it. (volume1) 
+  
+ 
+
+ 
+3. attach this volume to your ec2 instance 
+ 
+ 
+
+ 
+4. successfully attached the volume 
+  
+	- 	now from terminal we have to make partition of it and permanently mount it 
+Step 5 :- Permanently Mount the EBS Volume  
+1) sudo -i (Switch to root user) && fdisk -l (you will see the new volume). 
+ 
+
+  
+2) Make the partition of the new volume 
+-	fdisk /dev/xvdf 
+-	m 
+-	n (for new partition) 
+-	p (primary)  
+-	First Sector :- press Enter 
+-	Last Sector : press Enter 
+-	p  
+-	w (save & write out) 
+ 
+
+ 
+  
+3) After Partition is done - fdisk -l (you will see partitioned disk) 
+ 
+
+ 
+  
+4) Now , make file system - mkfs.ext4 /dev/xvdf1 
+ 
+
+ 
+  
+5) Permanently mount 
+-	vi /etc/fstab (Editor will open) 
+-	Press I for insert mode in Vi editor 
+-	Enter the path in editor as shown in following image 
+-	Save file & exit (Esc + :wq)  
+-	mount –a 
+-	df -h ( to see the volume is successfully mounted or not 
+ 
+
+6) It has been Successfully Mounted and also lost+found folder also appears. 
+  
+Step 6 :- Take the Snapshot of Volume 
+1) Go to Actions , click on create Snapshot 
+ 
+  
+2) Create Snapshot. 
+ 
+
+ 
+  
+3) Unmount our disk 
+ 
+ 
+
+ 
+  
+4) Detach the Created Volume: 
+ 
+
+  
+5) Delete the Volume: 
+ 
+
+ 
+  
+Now Volume has been successfully deleted. 
+Step 7 :- Create Volume of the Snapshot 
+ 
+
+-	You will see new volume has been created.  
+-	Attached this backeup volume to our ec2 Instance as 
+ Step 4. - fdisk -l ( you will see the partition has been already done as it is a Snapshot.  
+-	ls -l ( to check is if our disk is empty) 
+
+  
+-	Go to Terminal & mount the backup disk 
+-	mount /dev/xvdf1 /var/www/html/images  
+-	Now copy the IP of your Instance & paste it to your new browser & you  will see the website will run successfully with Images because the Volume  we created by Snapshot contains the Images . 
+
+ 
+  
+-	After completing this, Delete all the resources your created : 
+-	1. Delete Snapshot  
+2.	Delete Volume  
+3.	Delete Ec2 Instance 
+ 
+ 
