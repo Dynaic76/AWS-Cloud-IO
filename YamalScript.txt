@@ -32,6 +32,7 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Allow SSH and HTTP
+      VpcId: !Ref MyVPC
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 22
@@ -48,9 +49,9 @@ Resources:
       AvailabilityZone: ap-south-1a
       ImageId: ami-0dee22c13ea7a9a67
       InstanceType: t2.micro
-      KeyName: your-key
+      KeyName: your-key 
       SecurityGroups: 
-        - !Ref InstanceSecurityGroup
+        - !GetAtt InstanceSecurityGroup.GroupId  
       SubnetId: !Ref PublicSubnet 
 
   MyInstance1:
@@ -59,13 +60,14 @@ Resources:
       AvailabilityZone: ap-south-1a
       ImageId: ami-064ac61091898694e
       InstanceType: t2.micro
-      KeyName: your-key
+      KeyName: your-key  
       SecurityGroups: 
-        - !Ref InstanceSecurityGroup
+        - !GetAtt InstanceSecurityGroup.GroupId 
       SubnetId: !Ref PrivateSubnet 
+
   MySNSTopic:
     Type: AWS::SNS::Topic
     Properties:
       Subscription:
-      - Endpoint: "your@gmail.com"
+      - Endpoint: "demo@gmail.com"
         Protocol: email
